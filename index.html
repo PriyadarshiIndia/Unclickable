@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #e4b2d4e0;
+        }
+        
+div{
+    margin: 0 25% 0 25%;
+}
+#unclickable_button{
+    position: absolute;
+    left: 600px;
+}
+#clickable_button{
+ margin-left: 150px ;
+}
+
+
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 48px;
+            padding: 20px;
+            font-family: cursive;
+            margin-top: 0;
+            animation: rainbow 5s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { color: #691436; }
+            14% { color: #7a4b27; }
+            28% { color: #78246a; }
+            42% { color: #753889; }
+            57% { color: #284f7b; }
+            71% { color: #933233; }
+            85% { color: #662344; }
+            100% { color: #2c5d15; }
+        }
+
+        .card {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            background: #9e2553ba;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 750px;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .card_message {
+            margin: 5px;
+            color: rgb(237, 164, 146);
+            text-align: center;
+            font-family: cursive;
+            font-weight: 900;
+            font-size: 28px;
+        }
+        .btn_container{
+            width: 200px;
+        }
+       
+
+        .btn {
+            height: 40px;
+            width: 125px;
+            color: white;
+            background-color: #774094;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(0); }
+            75% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+
+        .centered_message {
+            position: fixed;
+            height: 448px;
+            width: 690px;
+            top: 20%;
+            left: 1%; 
+            /* transform: translate(-325%, -0%); */
+            z-index: 9999;
+            display: none;
+            text-align: center;
+            font-size: 24px;
+            color: white;
+            background-color: rgb(248 66 66 / 80%);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .message_visible {
+            display: block;
+        }
+        .message{
+            margin: 50px 0 0 0;
+            animation: rainbow 5s linear infinite;
+            font-family: cursive;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1 class="title">Heyy there..!!</h1>
+    <div class="card">
+        <div class="card-content">
+            <div class="card_message">Would you like to be my friend..?</div>
+        
+            <br><br><br><br><br><br>
+            <div class="btn_container">
+                <button class="btn " id="unclickable_button">No, never</button>
+                <button class="btn " id="clickable_button">Of course, yes</button>
+            </div>
+        </div>
+    </div>
+    <div class="centered_message">
+        <h1 class="message">Yayyyyy.....!!!</h1>
+        <h1 class="message">I knew we were going to be good friends. :)</h1>
+    </div>
+    
+    <script>
+        // Unclickable button functionality
+const upperContentHeight =110;
+const sideContentWidth = 150;
+
+const maxHeight = window.innerHeight - upperContentHeight;
+const maxWidth = window.innerWidth - sideContentWidth;
+
+window.addEventListener('DOMContentLoaded',()=>{
+    const button = document.getElementById('unclickable_button');
+    button.addEventListener('click',()=> alert("i have been clicked"));
+    button.addEventListener('mouseover',()=> console.log("you hovered over me"))
+
+
+    button.addEventListener('mouseover',()=>{
+        button.style.left = Math.floor(Math.random()*(maxWidth -250))+250 + 'px';
+        button.style.right = Math.floor(Math.random()*(maxWidth -250))-250 + 'px';
+        button.style.top = Math.floor(Math.random()*(maxHeight - 150))+150 + 'px';
+
+    })
+})
+        window.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('clickable_button');
+            const message = document.querySelector('.centered_message');
+            const card = document.querySelector('.card');
+
+
+            button.addEventListener('click', () => {
+                message.style.display = 'block';
+                card.style.visibility = 'hidden';
+                message.classList.add('message_visible');
+
+
+
+                setTimeout(() => {
+                    message.style.display = 'none';
+                    card.style.visibility = 'visible';
+                    message.classList.remove('message_visible');
+                }, 6000);
+            });
+
+            window.addEventListener('click', (event) => {
+                if (!message.contains(event.target) && event.target !== button) {
+                    message.style.display = 'none';
+                    card.style.visibility = 'visible';
+                    message.classList.remove('message_visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

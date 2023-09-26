@@ -1,2 +1,2 @@
 # Unclickable
-https://github.com/PriyadarshiIndia/Unclickable.git
+https://github.io/PriyadarshiIndia/Unclickable.git
